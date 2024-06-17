@@ -642,9 +642,8 @@ font-weight: 600;
 }
 
 .inspiration1{
-    margin-left: 80px;
-    margin-right: 80px;
-  
+   padding-left:  80px;
+   padding-right: 80px;
 
 }
 
@@ -739,16 +738,13 @@ h2{
 }
 
 .footer-box{
-    margin-left: 80px;
-    margin-right: 80px;
+  
     width: 1359.2px;
     display: grid;
     box-sizing: border-box;
    grid-template-columns: 1fr 1fr 1fr;
    justify-content: space-between;
-   padding-top: 48px;
-   padding-bottom: 48px;
-
+   
    border: 1px solid rgb(106,106,106);
    border-right: 0px;
    border-left: 0px;
@@ -760,13 +756,18 @@ h2{
 
 .footer{
     background-color: rgb(247, 247, 247);
-    width: 100%;
+    
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 48px;
+   padding-bottom: 48px;
+
     
 }
 
 .end{
-    margin-left: 80px;
-    margin-right: 80px;
+    padding-left: 80px;
+    padding-right: 80px;
     font-size: 14px;
     padding-top: 24px;
     padding-bottom: 24px;
@@ -814,4 +815,12 @@ align-items: center;
 
 .svg{
     margin-right: 6px;
+}
+
+.ed{
+    width: 1519.2px;
+}
+
+.fb{
+    width: 1519.2px;
 }
