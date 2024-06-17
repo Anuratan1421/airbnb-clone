@@ -581,11 +581,10 @@ padding-top: 4px;
 
 .inspiration{
    
-    
+    padding: 0px;
     background-color:rgb(247, 247, 247) ;
-    padding-top: 40px;
-    padding-bottom: 40px;
-
+    
+width: 1519.2px;
     
  border: 1px solid rgb(106,106,106);
  
@@ -642,9 +641,10 @@ font-weight: 600;
 }
 
 .inspiration1{
-   padding-left:  80px;
-   padding-right: 80px;
-
+padding-left: 80px;
+padding-right: 80px;
+padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 
@@ -745,12 +745,7 @@ h2{
    grid-template-columns: 1fr 1fr 1fr;
    justify-content: space-between;
    
-   border: 1px solid rgb(106,106,106);
-   border-right: 0px;
-   border-left: 0px;
-   border-top: 0px;
-   border-color:  rgba(0, 0, 0, 0.08);
-   box-shadow: 50000px 0px  rgba(0, 0, 0, 0.08) ;
+   
   
 }
 
@@ -773,6 +768,14 @@ h2{
     padding-bottom: 24px;
     display: flex;
     justify-content: space-between;
+
+    border: 1px solid rgb(106,106,106);
+   border-right: 0px;
+   border-left: 0px;
+   border-top: 1px;
+   border-bottom: 0px;
+   border-color:  rgba(0, 0, 0, 0.08);
+   box-shadow: -1px -1px  rgba(0, 0, 0, 0.08) ;
 }
 
 .end-box1{
@@ -823,4 +826,10 @@ align-items: center;
 
 .fb{
     width: 1519.2px;
+}
+
+.inspiration-button{
+    width: 1339..2px;
+    display: flex;
+    text-wrap: nowrap;
 }
