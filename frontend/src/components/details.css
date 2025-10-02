@@ -1,0 +1,329 @@
+@import "./landing.css";
+
+/* Details header and page layout (extends shared classes) */
+.details-header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  z-index: 10;
+}
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.back-button:hover {
+  background-color: #f3f4f6;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.action-button:hover {
+  background-color: #f3f4f6;
+}
+
+.details-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+.property-title-section {
+  margin-bottom: 24px;
+}
+.property-title {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+.property-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+}
+.rating-section {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.property-badge {
+  background-color: #fce7f3;
+  color: #be185d;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Image gallery */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  height: 384px;
+  margin-bottom: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.main-image {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-item {
+  position: relative;
+}
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.overlay-text {
+  color: white;
+  font-weight: 500;
+}
+
+/* Details layout */
+.details-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+@media (min-width: 1024px) {
+  .details-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.main-content {
+  grid-column: span 1;
+}
+
+/* Info sections */
+.info-section {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+.host-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.property-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+}
+.host-avatar {
+  width: 48px;
+  height: 48px;
+  background-color: #d1d5db;
+  border-radius: 50%;
+}
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.show-more-button {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px 24px;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.show-more-button:hover {
+  background-color: #f9fafb;
+}
+.description {
+  color: #374151;
+  line-height: 1.75;
+}
+
+/* Reviews */
+.reviews-section {
+  border: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.reviews-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.reviews-title {
+  font-size: 20px;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reviewer-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #d1d5db;
+  border-radius: 50%;
+}
+.reviewer-name {
+  font-weight: 500;
+}
+.review-date {
+  font-size: 14px;
+  color: #6b7280;
+}
+.review-text {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Booking card */
+.booking-card-container {
+  grid-column: span 1;
+}
+.booking-card {
+  position: sticky;
+  top: 96px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.price-section {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.price {
+  font-size: 24px;
+}
+.price-period {
+  color: #6b7280;
+}
+.date-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.date-input {
+  padding: 12px;
+}
+.date-input:first-child {
+  border-right: 1px solid #d1d5db;
+}
+.input-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+}
+.input-placeholder {
+  font-size: 14px;
+}
+.guest-input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.reserve-button {
+  width: 100%;
+  background-color: #ff5a5f;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background-color 0.2s;
+}
+.reserve-button:hover {
+  background-color: #e04449;
+}
+.booking-note {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+.pricing-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+}
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+}
+.pricing-label {
+  text-decoration: underline;
+}
+.pricing-total {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+}
