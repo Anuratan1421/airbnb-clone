@@ -116,17 +116,6 @@ export default function Landing() {
     { iconName: "Users", label: "Suitable for families" },
   ]
 
-  const inspirationCategories = [
-    "Popular",
-    "Arts & culture",
-    "Outdoors",
-    "Mountains",
-    "Beach",
-    "Unique stays",
-    "Categories",
-    "Things to do",
-  ]
-
   const footerSections = [
     {
       title: "Support",
@@ -224,7 +213,7 @@ export default function Landing() {
                 <div className="user-dropdown">
                   {token ? (
                     <>
-                      <button className="dropdown-item" onClick={() => alert("Go to Profile")}>
+                      <button className="dropdown-item" onClick={() => navigate("/profile")}>
                         Profile
                       </button>
                       <button
@@ -311,38 +300,6 @@ export default function Landing() {
           </div>
         </div>
       </main>
-
-      {/* Inspiration Section */}
-      <section className="inspiration-section" aria-labelledby="inspiration-title">
-        <div className="inspiration-container">
-          <h2 id="inspiration-title" className="inspiration-title">
-            Inspiration for future getaways
-          </h2>
-          <div className="inspiration-tabs" role="tablist" aria-label="Inspiration categories">
-            {inspirationCategories.map((cat, idx) => (
-              <button
-                key={idx}
-                className={`tab-button ${idx === 0 ? "tab-active" : ""}`}
-                role="tab"
-                aria-selected={idx === 0}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-          <div className="destinations-grid">
-            {Array.from({ length: 18 }, (_, i) => (
-              <div key={i} className="destination-item">
-                <p className="destination-name">Canmore</p>
-                <p className="destination-type">Apartment rentals</p>
-              </div>
-            ))}
-          </div>
-          <div className="show-more-container">
-            <button className="text-button">Show more</button>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="main-footer">

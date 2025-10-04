@@ -151,6 +151,25 @@ export default function Details({ showToast }) {
     return () => document.removeEventListener("click", handleClickOutside)
   }, [])
 
+   const footerSections = [
+    {
+      title: "Support",
+      links: ["Help Centre", "Get help with a safety issue", "AirCover", "Anti-discrimination", "Disability support", "Cancellation options"],
+    },
+    {
+      title: "Hosting",
+      links: ["Airbnb your home", "Airbnb your experience", "Airbnb your service", "AirCover for Hosts", "Hosting resources", "Community Forum"],
+    },
+    {
+      title: "Airbnb",
+      links: ["2025 Summer Release", "Newsroom", "Careers", "Investors", "Airbnb.org emergency stays", "Help Centre"],
+    },
+  ]
+
+  const handleLogoClick = () => {
+    navigate("/")
+  }
+
   return (
     <div className="app-container">
       {/* Navbar (same as landing) */}
@@ -186,7 +205,7 @@ export default function Details({ showToast }) {
                 <div className="user-dropdown">
                   {token ? (
                     <>
-                      <button className="dropdown-item" onClick={() => alert("Go to Profile")}>Profile</button>
+                      <button className="dropdown-item" onClick={() => navigate("/profile")}>Profile</button>
                       <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                     </>
                   ) : (
@@ -386,6 +405,57 @@ export default function Details({ showToast }) {
             </div>
           </aside>
         </div>
+        {/* Footer */}
+      <footer className="main-footer">
+        <div className="footer-container">
+          <div className="footer-sections">
+            {footerSections.map((section, idx) => (
+              <div key={idx}>
+                <h3 className="footer-section-title">{section.title}</h3>
+                <ul className="footer-links">
+                  {section.links.map((link, lidx) => (
+                    <li key={lidx}>
+                      <a href="#" className="footer-link">
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="footer-bottom">
+            <div className="footer-bottom-left">
+              <span>© 2025 Airbnb, Inc.</span> <span>•</span>
+              <a href="#" className="footer-link">
+                Privacy
+              </a>{" "}
+              <span>•</span>
+              <a href="#" className="footer-link">
+                Terms
+              </a>{" "}
+              <span>•</span>
+              <a href="#" className="footer-link">
+                Sitemap
+              </a>{" "}
+              <span>•</span>
+              <a href="#" className="footer-link">
+                Company details
+              </a>{" "}
+              <span>•</span>
+              <span>Clone by anuratan1421</span>
+            </div>
+            <div className="footer-bottom-right">
+              <div className="language-selector">
+                <Globe className="icon-sm" />
+                <span className="selector-text">English</span>
+              </div>
+              <span className="selector-text">₹ INR</span>
+              <div className="social-links" aria-label="Social links"></div>
+            </div>
+          </div>
+        </div>
+      </footer>
         {/* Auth Modal */}
       {showLogin && (
         <div className="login-overlay" onClick={() => setShowLogin(false)}>

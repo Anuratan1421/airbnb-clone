@@ -4,6 +4,7 @@ import { useState } from "react"
 import Landing from "./components/landing"
 import Details from "./components/details"
 import Booking from "./components/booking"
+import Profile from "./components/profile"
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 
 // ProtectedRoute component
@@ -24,6 +25,7 @@ export default function Page() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/submit" element={<Landing />} />
         <Route path="/details" element={<Details />} />
         
         <Route
@@ -31,6 +33,14 @@ export default function Page() {
           element={
             <ProtectedRoute>
               <Booking />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />
