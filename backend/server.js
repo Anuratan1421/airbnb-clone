@@ -61,13 +61,53 @@ const propertySchema = new mongoose.Schema({
 
 const Property = mongoose.model('propertie', userSchema);
 
+const profileSchema = new mongoose.Schema({
+  name: String,
+  address: {
+    City: String,
+    State: String,
+    Country: String,
+    Zipcode: String
+  },
+  contact_no: {
+    type: String,   // Use String to preserve leading zeros
+    validate: {
+      validator: function(v) {
+        return /^\d{10}$/.test(v);  // Must be exactly 10 digits
+      },
+      message: props => `${props.value} is not a valid 10-digit number!`
+    },
+    required: [true, 'User contact number required']
+  },
+  email: String,
+  date_of_birth: Date,
+
+});
+
+const Profile = mongoose.model('profile', userSchema);
+
+const bookingSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
+  checkIn: Date,
+  checkOut: Date,
+  nights: Number,
+  guests: Number,
+  notes: String,
+  paymentId: String,
+});
+
+const Booking = mongoose.model("booking", bookingSchema);
+
+
 // API to register user
 app.post("/register", async (req, res) => {
   console.log(req.body);
   const { name, contact_no, email, password } = req.body;
   const hashedPassword = await bcryptjs.hash(password, 10);
   const newUser = new User({ name, contact_no, email, password: hashedPassword });
-
+  const newProfile = new Profile({ name, contact_no, email });
   //check if user already exists
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -76,6 +116,7 @@ app.post("/register", async (req, res) => {
 
   // Save user to database
   await newUser.save();
+  await newProfile.save();
   res.status(201).json({ message: "User registered successfully" });
 });
 
@@ -93,9 +134,44 @@ app.post("/login", async (req, res) => {
     return res.status(400).json({ message: "Invalid credentials" });
   }
   // Create and sign JWT
-  const token = jwt.sign({ userId: user._id }, jwt_secret, { expiresIn: "1h" });
+  const token = jwt.sign({ userId: user._id, email: user.email }, jwt_secret, { expiresIn: "1h" });
   res.json({ token });
 });
+
+//Fetch profile
+
+app.get("/profile", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ message: "No token provided" });
+
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_secret_key");
+
+    const profile = await Profile.findOne({ email: decoded.email });
+    if (!profile) return res.status(404).json({ message: "Profile not found" });
+    console.log(profile)
+    res.json(profile);
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+//Save Profile
+app.post("/profile", async (req, res) => {
+  try{
+    const {name, address, contact_no, email, date_of_birth} = req.body;
+    const profile = await Profile.findOneAndUpdate({ email: email }, { name, address, contact_no, date_of_birth }, { new: true });
+    if (!profile) return res.status(404).json({ message: "Profile not found" });
+    res.json({ message: "Profile updated successfully", profile });
+
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+})
+
 
 //Fetch properties
 app.get("/properties", async (req, res) => {
@@ -130,5 +206,40 @@ app.post("/create-order", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+// === Booking API (called after successful payment) ===
+app.post("/booking", async (req, res) => {
+  try {
+    const bookingData = req.body;
+
+    const booking = new Booking(bookingData);
+    await booking.save(); // <-- saves to DB
+
+    res.json({ success: true, message: "Booking confirmed!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Booking failed", error: err.message });
+  }
+});
+
+// === GET bookings of a specific user ===
+app.get("/bookings", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ message: "No token provided" });
+
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, jwt_secret); // decode JWT
+
+    // Assuming you store user's email in the Booking schema
+    const bookings = await Booking.find({ email: decoded.email }).sort({ createdAt: -1 });
+
+    res.json(bookings);
+  } catch (err) {
+    console.error("Error fetching user bookings:", err);
+    res.status(500).json({ message: "Failed to fetch bookings", error: err.message });
+  }
+});
+
 
 app.listen(5000, () => console.log("Server running on port 5000"));

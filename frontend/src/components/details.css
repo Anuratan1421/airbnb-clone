@@ -318,7 +318,7 @@
   justify-content: space-between;
 }
 .pricing-label {
-  text-decoration: underline;
+  text-decoration: none;
 }
 .pricing-total {
   border-top: 1px solid #e5e7eb;
